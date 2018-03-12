@@ -51,11 +51,10 @@ public class PerceptronLearner {
             iterations++; // update iteration-counter
         } while (iterations <= maxIterations && weightsChanged); // terminate loop if maxIterations has been exceeded or when no change of the weights has occured
         
-       
         if (weightsChanged) { // loop terminated because iterations > maxIterations
-            return maxIterations.toString();
+            return maxIterations.toString(); // return maxIterations as output
         } else { // loop terminated because it found a valid solution in iterations <= maxIteerations
-            return iterations + " " + classifyQueries(queries, weightsPV);
+            return iterations + " " + classifyQueries(queries, weightsPV); // return a string with iterations + concat of the classifications in terms of "+" and "-"'s
         }
     }
     
@@ -69,8 +68,15 @@ public class PerceptronLearner {
         });
     }
     
+    /**
+     * Classification of the queries
+     * @pre Perceptron Learning Algorithm converged 
+     * @param queries which need to be 'classified'
+     * @param weights result of PerceptronLearner which will be used to classify the queries
+     * @return 
+     */
     private String classifyQueries(List<PVector> queries, PVector weights) {
-        String classification = " "; // String that will be appended and returned
+        String classification = ""; // String that will be appended and returned
         for (PVector query : queries) { // iterate over sample
             // calculate dot product w * x
             int weigthsDOTquery = weights.dotProduct(query);
